@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>user registration</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style type="text/css">
+label {
+	display: inline-block;
+	width: 200px;
+	margin: 5px;
+	text-align: left;
+}
+
+input[type=text], input[type=password], select {
+	display: inline-block;
+	width: 200px;
+}
+
+input[type=radio] {
+	margin-left: 45px;
+}
+
+input[type=checkbox] {
+	margin-right: 190px;
+}
+
+.error {
+	color: red;
+	font-style: italic;
+}
+
+button {
+	margin: 10px;
+	padding: 5px;
+}
+</style>
+
+</head>
+<body>
+	<div align="center">
+		<h2>USER REGISTRATION</h2>
+		<form action="#" th:action="@{/register}" th:object="${user}"
+			method="post">
+			<div class="form-group">
+				<label>Full name:</label> <input type="text" th:field="*{name}" />
+				<p class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+					th:errors="*{name}">
+					<br />
+			</div>
+			<div class="form-group">
+				<label>Email:</label> <input type="text" th:field="*{email}" />
+				<div class="alert alert-warning"
+					th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				<br />
+			</div>
+			<div class="form-group">
+				<label>Password:</label> <input type="password"
+					th:field="*{password}" />
+				<p class="alert alert-danger"
+					th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+					<br />
+			</div>
+			<div class="form-group">
+				<label>Birthday (yyyy-mm-dd):</label> <input type="text"
+					th:field="*{birthday}" />
+				<p class="alert alert-danger"
+					th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" />
+
+				<br />
+			</div>
+			<div class="form-group">
+				<label>Gender:</label> <input type="radio" th:field="*{gender}"
+					value=Male /> Male <input type="radio" th:field="*{gender}"
+					value=Female /> Female
+				<div class="alert alert-warning"
+					th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+				<br />
+			</div>
+			<div class="form-group">
+			<label>Profession:</label> <select th:field="*{profession}">
+				<option th:each="p : ${list}" th:value="${p}"
+					th:text="${p}" />
+			</select>
+			<br />
+			</div>
+			<div class="form-group">
+				<label>Married?</label> <input type="checkbox" th:field="*{married}" />
+				<div class="alert alert-warning"
+					th:if="${#fields.hasErrors('married')}" th:errors="*{married}"></div>
+				<br />
+			</div>
+
+			<div class="form-group">
+				<label>Note:</label>
+				<textarea rows="5" cols="25" th:field="*{note}"></textarea>
+				<div class="alert alert-warnning"
+					th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></div>
+				<br />
+			</div>
+
+			<button type="submit">Register</button>
+		</form>
+
+	</div>
+
+</body>
+</html>
